@@ -18,4 +18,5 @@ class Database {
         mysqli_close($this->connection);
     }
 }
+
 ?>

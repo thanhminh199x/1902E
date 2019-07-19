@@ -1,24 +1,27 @@
 <?php
+
+
 class productModel extends Database {
     public $table = "product";
-
-
     public function __construct($ipDatabase, $userDatabase, $passDatabase, $databaseName)
     {
         parent::__construct($ipDatabase, $userDatabase, $passDatabase, $databaseName);
     }
-piblic function __construct($ipDatabase,$useDatabase,$passDatabase,$databaseName)
-{
-parent::__construct($ipDatabase,$useDatabase,$passDatabase,$databaseName);
-}
-public function index(){
-    $sqlSelect = "SELECT * FROM".$this->table;
-    $result = $this->connection->query($sqlSelect);
-
-    return $result;
-
+    public function printDatabaseName() {
+        /**
+         * Truy cập được thuộc tính hoặc là phương thức
+         * có giới hạn là protected ở trong class cha
+         */
+        echo $this->databaseName;
     }
-
+    /**
+     * Lấy ra tất các bản ghi từ bảng products
+     */
+    public function index() {
+        $sqlSelect = "SELECT * FROM ".$this->table;
+        $result = $this->connection->query($sqlSelect);
+        return $result;
+    }
     /**
      * $data chính là mảng chứa dữ liệu để tạo 1 bản ghi mới
      * không cần cái key id array('product_name' => 'son môi')
@@ -43,26 +46,14 @@ VALUES ('$product_name', '$product_desc', '$created')";
      */
     public function edit($data) {
         // $this->connection
-        if (isset($data["product_name"]) && isset($data["product_desc"]) && isset($data["created"])  && isset($data["id"])){
-            $id =$data["id"];
-            $product_name = $data["product_name"];
-            $product_desc =$data["product_desc"];
-            $created = $data["created"];
-            $sqledit = "UPDATE ".$this->table . " SET product_name='$product_name',product_desc='$product_desc',created=$created  WHERE id=$id";
-//            thực hiện câu lệnh sql
-            $result = $this->connection ->query( $sqledit);
-            return $result;
 
-        }
+    }
     /**
      * Xóa
      * @param $prodcut_id
      */
-    public function delete($data) {
-        $sqldelete ="delete prom".$this->table."where id =$id";
-        $result = $this->connection->query($sqldelete);
-        return $result;
-
+    public function delete($prodcut_id) {
     }
 }
+
 ?>
